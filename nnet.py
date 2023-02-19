@@ -1,6 +1,6 @@
 import tensorflow as tf
 # import tensorflow_hub as hub
-from tensorflow.keras.applications.resnet50 import decode_predictions
+# from keras.applications.resnet50 import decode_predictions
 import numpy as np
 import cv2
 
@@ -36,6 +36,8 @@ class Network:
 
         return sample_image
 
+
     def prediction(self):
         predictions = self.__model.predict(self.__image)
-        return decode_predictions(predictions, top=3)[0]
+        p = tf.keras.applications.resnet50.decode_predictions(predictions, top=1)[0]
+        return p[0][1]
